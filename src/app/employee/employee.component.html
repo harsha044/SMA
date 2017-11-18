@@ -1,0 +1,18 @@
+<p>
+  Employee Component
+</p>
+
+Name : {{employeename}} <!-- -->
+
+<div [hidden]="toggle" [innerText]="department"></div>
+<div *ngIf="toggle" [innerText]="age"></div>
+<button (click)="deptoggle()">Toggle</button>
+
+<app-employee-list [empList]="employee" [title]="'Employee List'" (message)="receivefromchild($event)"></app-employee-list>
+{{message}}
+
+<!--<app-department [msgs]="msg"></app-department> -->
+<app-department></app-department>
+<!--<app-department></app-department>
+<app-department></app-department>
+<app-department></app-department>-->

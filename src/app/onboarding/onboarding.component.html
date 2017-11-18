@@ -1,0 +1,63 @@
+<h1>
+  OnBoarding Form
+</h1>
+<!-- {{onboardingForm.value | json }}  -->
+<form [formGroup]="onboardingForm" (submit)="addemployee()">
+  <div class="form-group">
+    <input class="form-control"  type="text" name="name" formControlName="name" placeholder="Employee Name" />
+  </div>
+  <div class="form-group">
+    <input class="form-control"  type="date" name="dob" formControlName="dob" placeholder="Employee DOB" />
+  </div>
+  <div class="form-group">
+    <input class="form-control"  type="number" name="age" formControlName="age" placeholder="Employee Age" />
+  </div>
+  <div class="form-group">
+    <input class="form-control"  type="text" name="pan" formControlName="pan" placeholder="Employee PAN" />
+  </div>
+  <div class="form-group">
+    <input class="form-control"  type="number" name="exp" formControlName="exp" placeholder="Employee Experience" />
+  </div>
+  <div class="form-group">
+    <input class="form-control"  type="email" name="emailid" formControlName="emailid" placeholder="Employee Email" />
+  </div>
+  <div class="form-group" formGroupName="address">
+    <div class="form-group">
+      <input class="form-control" type="email" name="addressline1" formControlName="addressline1" placeholder="Address 1" />
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" name="addressline2" formControlName="addressline2" placeholder="Address 2" />
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" name="city" formControlName="city" placeholder="City" />
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="number" name="pin" formControlName="pin" placeholder="Pin Code" />
+    </div>
+  </div>
+  <div class="form-group" formArrayName="pastexp">
+    <div class="form-group" *ngFor="let exp of onboardingForm.controls.pastexp.controls;let i=index">
+      <div class="form-group" [formGroupName]="i">
+        <div class="form-group">
+          <input class="form-control" type="email" name="employerName" formControlName="employerName" placeholder="Employer Name" />
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="text" name="designation" formControlName="designation" placeholder="Designation" />
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="date" name="startDate" formControlName="startDate" placeholder="Start Date" />
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="date" name="endDate" formControlName="endDate" placeholder="End Date" />
+        </div>
+        <div class="form-group"><button type="button" class="btn btn-danger" (click)="removeEmployer(i)" >Delete Employer</button></div>
+      </div>
+    </div>
+  </div>
+  <div  class="form-group" >
+    <button type="button" class="btn btn-primary" (click)="addEmployer()" >Add Employer</button>
+  </div>
+  <div class="from-group">
+    <button type="submit" [disabled]="onboardingForm.invalid" class="btn btn-primary">Add Employee</button>
+  </div>
+</form>
