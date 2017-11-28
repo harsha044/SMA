@@ -1,3 +1,5 @@
+import { AuthGuard } from './../service/guards/auth.guard';
+import { LoginComponent } from './../login/login.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -8,16 +10,18 @@ import { EmployeeListComponent } from '../employee/employee-list/employee-list.c
 import { OnboardingComponent } from '../onboarding/onboarding.component';
 import { PagenotfoundComponent } from '../pagenotfound/pagenotfound.component';
 import { SharedModule } from '../shared/shared.module';
+//import { AuthGuard } from '../service/guards/auth.guard';
 @NgModule({
   imports: [
     CommonModule, SharedModule,
     RouterModule.forRoot([
-      { path: 'employee' , component : EmployeeComponent },
-      { path: 'department' , component : DepartmentComponent },
-      //{ path: 'todo' , component : TodoComponent },
-      { path: 'onboarding' , component : OnboardingComponent },
-      { path:'', redirectTo : 'employee', pathMatch: 'full' },
-      { path:'**', component : PagenotfoundComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'employee', component: EmployeeComponent, canActivate: [AuthGuard] },
+      { path: 'department', component: DepartmentComponent, canActivate: [AuthGuard] },
+      { path: 'todo', loadChildren: '../todo/todo.module#TodoModule' },
+      { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuard] },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: '**', component: PagenotfoundComponent }
     ])
   ],
   declarations: []
